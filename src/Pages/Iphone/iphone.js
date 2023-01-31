@@ -1,3 +1,13 @@
+// Question 2.
+// Create a dynamic page to display the different Apple products that you stored in your
+// Database (during your MySQL class). To do that, you will need to create a functional
+// component called “Iphone.js” and fetch the Iphone products data from your Database
+// using API. Once you fetch the data, display them on your React based Apple website replica
+// when the “iphone” section from your Navbar is clicked. Please watch the demo video here
+// to see what your dynamic page should look like
+
+
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -5,6 +15,7 @@ function Iphone() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    //http://localhost:3001/iphones
     fetch("/iphones.json")
       .then((res) => res.json())
       .then((products) => {
@@ -81,3 +92,7 @@ function Iphone() {
   );
 }
 export default Iphone;
+
+
+
+

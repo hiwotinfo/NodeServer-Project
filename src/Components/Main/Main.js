@@ -6,8 +6,7 @@ import series5 from "../../images/icons/watch-series5-logo.png";
 import arcade from "../../images/icons/arcade.png";
 
 import Fourth from "./Fourth/Fourth";
-import Rating from "./Rating/Rating";
-import Youtube from "../Youtube/Youtube";
+
 
 function Main() {
   return (
@@ -247,10 +246,6 @@ function Main() {
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="youtubeVideosWrapper top-100">
-        {/* <Youtube /> */}
       </section>
     </div>
   );

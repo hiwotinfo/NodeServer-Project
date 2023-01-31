@@ -1,47 +1,56 @@
-import React, { Component } from "react";
 
-class Productpage extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      products: [],
-      productID: props.match.params.pid,
-    };
-  }
 
-  componentDidMount() {
-    fetch("/iphones.json")
+// Quastion 3.
+// Create a dynamic page to display a single Apple product (that you stored in your Database)
+// when the “Learn more” button from your “Iphone.js” page is clicked. Please watch the
+// demo video here to see what your dynamic page should look like
+// import React, {useEffect, useState } from "react";
+// import { useParams}  from "react-router-dom";
+
+
+import React, {useEffect, useState } from "react";
+import { useParams}  from "react-router-dom";
+
+import Four04 from "../Four04/Four04";
+
+const Productpage = ()=> {
+const[products, setProducts] = useState([]);
+console.log(useParams());
+   const {productID} = useParams();
+   console.log(productID);
+
+    
+  useEffect(() =>{
+    fetch("http://localhost:3001/iphones")
       .then((res) => res.json())
-      .then((products) => {
-        const productList = products.products;
+      .then((data) => {
+        const productList = data.products;
+        console.log(productList);
         const singleProduct = productList.filter(
-          (x) => x.product_url == this.state.productID
+          (product) => product.product_url === productID
         );
-        this.setState((state) => {
-          return {
-            products: singleProduct,
-          };
-        });
-      });
-  }
+        setProducts(singleProduct);
+      })
+.catch(()  => console.log("Errors unabae to fetch!!"));
+  }, [productID]);
+  console.log(products);
+  if(products.length) {
 
-  render() {
-    // console.log(this.state.productID);
     return (
-      <div>
+      
         <section className="internal-page-wrapper top-100">
           <div className="container">
-            {this.state.products.map((product) => {
+            {products?.map((product) => {
               let id = product.product_url;
               let title = product.product_name;
               let img = product.product_img;
               let Brief = product.product_brief_description;
               let StartPrice = product.starting_price;
               let PriceRange = product.price_range;
-              let productPage = "/iphone/" + id;
+              let Productpage = "/iphone/" + id;
               let details = product.product_description;
-
-              let productDiv = (
+              return (
+            
                 <div key={id} className="bottom-100">
                   <div className="row justify-content-center text-center bottom-50">
                     <div className="col-12">
@@ -67,12 +76,15 @@ class Productpage extends Component {
                   </div>
                 </div>
               );
-              return productDiv;
+            
             })}
           </div>
+
         </section>
-      </div>
     );
+  }
+  else{
+    return <Four04 />
   }
 }
 export default Productpage;

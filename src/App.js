@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// BrowserRouter
+import React from "react";
+import { BrowserRouter, Routes, Route} from 'react-router-dom';// BrowserRouter
 // To add the ability to add routing functionality
 // Switch
 // Checks provided paths and stops checking all as soon as it finds a match
@@ -17,27 +15,39 @@ import Main from "./Components/Main/Main";
 import Iphone from "./Pages/Iphone/iphone";
 import Mac from "./Pages/Mac/Mac";
 import Four04 from "./Pages/Four04/Four04";
+import Watch from "./Pages/Watch/Watch";
 import Productpage from "./Pages/Productpage/Productpage";
+
+
 
 // import general css
 import "./css/styles.css";
 
 function App() {
   return (
-    <Router>
-      <div>
+    <BrowserRouter>
+      <>
         <Navigation />
-        <Switch>
-          <Route path="/" exact component={Main} />
-          <Route path="/mac" exact component={Mac} />
-          <Route path="/iphone" exact component={Iphone} />
-          <Route path="/iphone/:pid" exact component={Productpage} />
-          <Route path="/" component={Four04} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Main />}/>
+          <Route path="/mac" element={<Mac />} />
+          <Route path="/iphone" element={<Iphone />} />
+
+          <Route path="/watch" element={<Watch />} />
+       
+          <Route path="/iphone/:productID" element={<Productpage />}/>
+          <Route path="*" element={<Four04 />} />
+        </Routes>
         <Footer />
-      </div>
-    </Router>
+      </>
+</BrowserRouter>
   );
 }
 
 export default App;
+
+//           {/* <Route path="/ipad" element={<Ipad />} /> */}
+//    {/* <Route path="/tv" element={<TV />} /> */}
+//           {/* <Route path="/music" element={<Music />} /> */}
+//           {/* <Route path="/support" element={<Support />} /> */}
+//           {/* <Route path="/cart" element={<Cart />} /> */}
